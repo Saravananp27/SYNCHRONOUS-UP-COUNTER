@@ -1,12 +1,11 @@
-# EXP-11 SERIAL-IN-SERIAL-OUT-SHIFTREGISTER
-
-**NAME:SARAVANAN P**
-
-**REF NO:24900878**
-
+### SYNCHRONOUS-UP-COUNTER
+```
+Developed By:SARAVANAN P
+Register No: 24900878
+```
 **AIM:**
 
-To implement  SISO Shift Register using verilog and validating their functionality using their functional tables
+To implement 4 bit synchronous up counter and validate functionality.
 
 **SOFTWARE REQUIRED:**
 
@@ -14,51 +13,60 @@ Quartus prime
 
 **THEORY**
 
-**SISO shift Register**
+**4 bit synchronous UP Counter**
 
-A Serial-In Serial-Out shift register is a sequential logic circuit that allows data to be shifted in and out one bit at a time in a serial manner. It consists of a cascade of flip-flops connected in series, forming a chain. The input data is applied to the first flip-flop in the chain, and as the clock pulses, the data propagates through the flip-flops, ultimately appearing at the output.
+If we enable each J-K flip-flop to toggle based on whether or not all preceding flip-flop outputs (Q) are “high,” we can obtain the same counting sequence as the asynchronous circuit without the ripple effect, since each flip-flop in this circuit will be clocked at exactly the same time:
 
-The logic circuit provided below demonstrates a serial-in serial-out (SISO) shift register. It comprises four D flip-flops that are interconnected in a sequential manner. These flip-flops operate synchronously with one another, as they all receive the same clock signal.
+![image](https://github.com/naavaneetha/SYNCHRONOUS-UP-COUNTER/assets/154305477/d5db3fa0-e413-404c-b80e-b2f39d82e7e8)
 
-![image](https://github.com/naavaneetha/SERIAL-IN-SERIAL-OUT-SHIFTREGISTER/assets/154305477/e81c4072-37f9-46c6-8145-566764b74c3a)
 
-Figure 01 4 Bit SISO Register
+![image](https://github.com/naavaneetha/SYNCHRONOUS-UP-COUNTER/assets/154305477/52cb61eb-d04b-442d-810c-31185a68410b)
 
-The synchronous nature of the flip-flops ensures that the shifting of data occurs in a coordinated manner. When the clock signal rises, the input data is sampled and stored in the first flip-flop. On subsequent clock pulses, the stored data propagates through the flip-flops, moving from one flip-flop to the next.
-Each D flip-flop in the circuit has a Data (D) input, a Clock (CLK) input, and an output (Q). The D input represents the data to be loaded into the flip-flop, while the CLK input is connected to the common clock signal. The output (Q) of each flip-flop is connected to the D input of the next flip-flop, forming a cascade.
+Each flip-flop in this circuit will be clocked at exactly the same time.
+The result is a four-bit synchronous “up” counter. Each of the higher-order flip-flops are made ready to toggle (both J and K inputs “high”) if the Q outputs of all previous flip-flops are “high.”
+Otherwise, the J and K inputs for that flip-flop will both be “low,” placing it into the “latch” mode where it will maintain its present output state at the next clock pulse.
+Since the first (LSB) flip-flop needs to toggle at every clock pulse, its J and K inputs are connected to Vcc or Vdd, where they will be “high” all the time.
+The next flip-flop need only “recognize” that the first flip-flop’s Q output is high to be made ready to toggle, so no AND gate is needed.
+However, the remaining flip-flops should be made ready to toggle only when all lower-order output bits are “high,” thus the need for AND gates.
 
+**Procedure**
+
+/* * 1.Type the Verilog program in Quartus Prime to implement the 4-bit synchronous up
+counter.
+2.Compile and run the program to ensure there are no syntax or logical errors.
+3.Generate the RTL schematic to visualize the structure of the synchronous counter and
+verify the design logic.
+4.Create nodes for the clock (CLK), reset, and counter outputs (Q3, Q2, Q1, Q0) to
+observe the counting process.
+5.Simulate the design for multiple clock cycles and observe the timing diagrams to
+confirm that the counter increments its value synchronously at each clock pulse.*/
 
 **PROGRAM**
-```
-Developed by: SARAVANAN P RegisterNumber: 24900878
-```
-SISO Shift Register
-```
-module EXP10(clk, sin, q);
-input clk;
-input sin;
-output [3:0] q;
-reg [3:0] q;
-always @(posedge clk)
-begin
-q[0] <= sin;
-q[1] <= q[0];
-q[2] <= q[1];
-q[3] <= q[2];
-end
-endmodule
-```
 
-**RTL LOGIC FOR SISO Shift Register**
+/* Program for flipflops and verify its truth table in quartus using Verilog programming. 
 
-![image](https://github.com/user-attachments/assets/5a1f7f1c-70e9-44df-8c24-f9aa7ef02608)
+Developed by:SARAVANAN P RegisterNumber:24900878
+![Screenshot 2024-12-24 103025](https://github.com/user-attachments/assets/f90283f8-981a-4802-b210-c970288adadf)
+
+*/
+
+**RTL LOGIC UP COUNTER**
+
+![Screenshot 2024-12-24 103154](https://github.com/user-attachments/assets/c1a3300a-29bb-4c34-bc47-983b9be230b1)
 
 
-**TIMING DIGRAMS FOR SISO Shift Register**
+**TIMING DIAGRAM FOR IP COUNTER**
 
-![image](https://github.com/user-attachments/assets/74c64092-04dd-4146-b3a2-4932ff379141)
+![Screenshot 2024-12-24 103226](https://github.com/user-attachments/assets/b1b2428c-4e0e-4475-93c1-3cef31e5c0b8)
+
+
+**TRUTH TABLE**
+
+![Screenshot 2024-12-24 103242](https://github.com/user-attachments/assets/85cdea89-d90c-42c5-8a91-eb02ef6b23a8)
+
 
 
 **RESULTS**
-
-The 4-bit SISO (Serial-In Serial-Out) shift register was successfully implemented using Verilog in Quartus Prime. The functionality was validated using the truth table. The shift register correctly shifted the input data one bit at a time through the flip-flops on each clock pulse. The outputs q0, q1, q2, and q3 were observed to propagate the input data as expected, confirming the correct operation of the shift register.
+```
+Implement 4 bit synchronous up counter and validate functionality using quartus verified.
+```
